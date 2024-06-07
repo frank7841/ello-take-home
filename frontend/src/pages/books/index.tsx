@@ -24,11 +24,18 @@ const Books =()=> {
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
     };
+
     const handleAddToReadingList = (book: Book) => {
         if (!readingList.includes(book)) {
             setReadingList([...readingList, book]);
         }
     };
+
+    const handleRemoveFromReadingList = (book: Book) => {
+        const updatedList = readingList.filter((item) => item !== book);
+        setReadingList(updatedList);
+    };
+
     const searchResults = searchQuery.trim() !== '' ?
     data?.books.filter(book =>
         book.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -86,10 +93,19 @@ const clearSearch = () => {
                 )}
            </Box>
        </Box>
+       <Typography variant="h3" component="h4" gutterBottom>Reading List</Typography>
+       <Grid container spacing={3} mt={5}>
+            {readingList.map((book, index) => (
+                <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
+                    <BookCard book={book} inReadingList={true} onRemove={handleRemoveFromReadingList} />
+                </Grid>
+            ))}
+        </Grid>
+        <Typography variant="h3" component="h4" gutterBottom>All Books</Typography>
         <Grid container spacing={3} mt={5}>
             {data?.books.map((book, index) => (
                 <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
-                    <BookCard book={book} />
+                    <BookCard book={book} inReadingList={false} />
                 </Grid>
             ))}
         </Grid>

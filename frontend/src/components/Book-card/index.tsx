@@ -1,12 +1,19 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { Book } from '../../types';
 
 interface BookCardProps {
     book: Book;
+    inReadingList:boolean;
+    onRemove?: (book: Book) => void;
 }
-const BookCard = ({ book }:BookCardProps) => {
+const BookCard = ({ book, inReadingList, onRemove }:BookCardProps) => {
     const imagePath = `/${book.coverPhotoURL}`;
+    const handleRemoveClick = () => {
+        if (onRemove) {
+            onRemove(book);
+        }
+    };
     return (
         <Card>
             <CardMedia
@@ -25,6 +32,9 @@ const BookCard = ({ book }:BookCardProps) => {
                 <Typography variant="body2" color="text.secondary">
                     {book.readingLevel}
                 </Typography>
+                {inReadingList && (
+                    <Button onClick={handleRemoveClick}>Remove</Button>
+                ) }
             </CardContent>
         </Card>
     );

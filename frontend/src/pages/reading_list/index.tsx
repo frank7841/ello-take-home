@@ -4,8 +4,8 @@ import Layout from '../../components/Layout';
 const ReadingList =()=> {
   return (
     <Layout>
-         Reading List
-    </Layout>
+       Reading List
+       </Layout>
   )  
   
 }
