@@ -1,4 +1,4 @@
-import { Grid, TextField, IconButton, InputAdornment, Typography, CircularProgress, Alert, List,ListItem, Paper, ListItemText,Button, Box, ListItemAvatar, Avatar, Snackbar } from '@mui/material';
+import { Grid, TextField, IconButton, InputAdornment, Typography, CircularProgress, Alert, List,ListItem, Paper, ListItemText,Button, Box, ListItemAvatar, Snackbar } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear'
 import { useQuery,gql } from '@apollo/client';
 import BookCard from '../../components/Book-card';
@@ -94,7 +94,7 @@ const Books =()=> {
                                    <img src={`/${book.coverPhotoURL}`} alt={book.title} style={{ maxWidth: '100px', paddingRight: "0.5em" }} />
                                </ListItemAvatar>
                                <ListItemText primary={book.title} secondary={book.author} />
-                               <Button variant='contained' style={{ backgroundColor: "#28B8B8" }} onClick={() => handleAddToReadingList(book)}>Add to list</Button>
+                               <Button variant='contained' style={{ backgroundColor: "#28B8B8", marginLeft:"0.5em" }} onClick={() => handleAddToReadingList(book)}>Add to list</Button>
                            </ListItem>
                        ))}
                    </List>

@@ -5,15 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
 import client from './AppoloCLient';
+import { ThemeProvider } from '@emotion/react';
+import theme from './theme';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
       <React.StrictMode>
         <App />
       </React.StrictMode>
+      </ThemeProvider>
   </ApolloProvider>
 );
 
