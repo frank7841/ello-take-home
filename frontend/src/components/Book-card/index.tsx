@@ -6,12 +6,13 @@ interface BookCardProps {
     book: Book;
 }
 const BookCard = ({ book }:BookCardProps) => {
+    const imagePath = `/${book.coverPhotoURL}`;
     return (
         <Card>
             <CardMedia
                 component="img"
                 height="140"
-                image={book.coverPhotoURL}
+                image={imagePath}
                 alt={book.title}
             />
             <CardContent>
