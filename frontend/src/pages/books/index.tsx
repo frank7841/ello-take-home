@@ -1,4 +1,4 @@
-import { Grid, TextField, IconButton, InputAdornment, Typography, CircularProgress, Alert, List,ListItem, Paper, ListItemText,Button, Box, ListItemAvatar, Avatar } from '@mui/material';
+import { Grid, TextField, IconButton, InputAdornment, Typography, CircularProgress, Alert, List,ListItem, Paper, ListItemText,Button, Box, ListItemAvatar, Avatar, Snackbar } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear'
 import { useQuery,gql } from '@apollo/client';
 import BookCard from '../../components/Book-card';
@@ -18,6 +18,9 @@ const Books =()=> {
     const { loading, error, data } = useQuery<{ books: Book[] }>(GET_BOOKS);
     const [searchQuery, setSearchQuery] = useState('');
     const [readingList, setReadingList] = useState<Book[]>([]);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
     if (loading) return <CircularProgress />;
     if (error) return <Alert severity="error">Error: {error.message}</Alert>;
     
@@ -28,6 +31,7 @@ const Books =()=> {
     const handleAddToReadingList = (book: Book) => {
         if (!readingList.includes(book)) {
             setReadingList([...readingList, book]);
+            showSnackbar(`"${book.title}" has been added to your reading list.`);
         }
     };
 
@@ -47,14 +51,20 @@ const Books =()=> {
     ) :
     data?.books;
 
-const clearSearch = () => {
+    const clearSearch = () => {
     setSearchQuery('');
-};
+    };
 
+    const showSnackbar = (message : string) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+    
+    const isReadingListEmpty = readingList.length === 0;
 
   return ( 
     <div>
-        <Typography variant="h2" component="h3" gutterBottom>Book Assignment View</Typography>
+
         
         <Box width="100%" display="flex" justifyContent="center">
             <Box width="50%" display="flex" flexDirection="column" alignItems="center">
@@ -97,14 +107,20 @@ const clearSearch = () => {
            </Box>
        </Box>
        <Typography variant="h3" component="h4" gutterBottom>My Reading List</Typography>
-       <Grid container spacing={3} mt={5}>
-            {readingList.map((book, index) => (
-                <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
-                    <BookCard book={book} inReadingList={true} onRemove={handleRemoveFromReadingList} />
-                </Grid>
-            ))}
-        </Grid>
-        <Typography variant="h3" component="h4" gutterBottom>All Books</Typography>
+       {isReadingListEmpty ? (
+        
+        <Typography variant="h5" component="h6" gutterBottom color="#5ACCCC">Search a book to add to your reading list.</Typography>
+       ):(
+        
+        <Grid container spacing={3} mt={5}>
+        {readingList.map((book, index) => (
+            <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
+                <BookCard book={book} inReadingList={true} onRemove={handleRemoveFromReadingList} />
+            </Grid>
+        ))}
+    </Grid>
+       )}
+               <Typography variant="h3" component="h4" gutterBottom>All Books</Typography>
         <Grid container spacing={3} mt={5}>
             {data?.books.map((book, index) => (
                 <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
@@ -112,6 +128,14 @@ const clearSearch = () => {
                 </Grid>
             ))}
         </Grid>
+        <Snackbar
+                anchorOrigin={{vertical:"top", horizontal:"center"}}
+            
+                open={snackbarOpen}
+                autoHideDuration={1500} 
+                onClose={() => setSnackbarOpen(false)}
+                message={snackbarMessage}
+            />
     </div>
   );
 }

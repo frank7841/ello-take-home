@@ -26,14 +26,15 @@ const BookCard = ({ book, inReadingList, onRemove }:BookCardProps) => {
                 <Typography gutterBottom variant="h5" component="div">
                     {book.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {book.author}
+                <Typography variant="body2" color="#335C6E">
+                <span style={{ fontStyle: 'italic', marginRight: '0.5em',color:"#FAAD00" }}>Author:</span>{book.author}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {book.readingLevel}
+                
+                <Typography variant="body2" color="#335C6E">
+                <span style={{ fontStyle: 'italic', marginRight: '0.5em', color:"#FAAD00" }}>Reading Level:</span>{book.readingLevel}
                 </Typography>
                 {inReadingList && (
-                    <Button variant='contained' style={{ backgroundColor: '#FAAD00' }} onClick={handleRemoveClick}>Remove</Button>
+                    <Button variant='contained' style={{ backgroundColor: '#F76434' }} onClick={handleRemoveClick}>Remove</Button>
                 ) }
             </CardContent>
         </Card>
