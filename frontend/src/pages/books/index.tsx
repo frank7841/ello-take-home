@@ -45,11 +45,7 @@ const Books =()=> {
         book.title.toLowerCase().includes(searchQuery.toLowerCase())
     ) : [];
 
-    const filteredBooks = searchQuery.trim() !== '' ?
-    data?.books.filter(book =>
-        book.title.toLowerCase().includes(searchQuery.toLowerCase())
-    ) :
-    data?.books;
+ 
 
     const clearSearch = () => {
     setSearchQuery('');
