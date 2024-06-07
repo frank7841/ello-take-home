@@ -1,7 +1,7 @@
 import { Box, AppBar, Toolbar, Typography, IconButton, Drawer,List,ListItem,ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu'
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const navLinks=[
     {
@@ -10,7 +10,7 @@ const navLinks=[
     },
     {
         name:"Reading List",
-        link:"/",
+        link:"/reading-list",
     }
 ]
 const  Navbar =()=> {
@@ -27,7 +27,7 @@ const  Navbar =()=> {
         <AppBar position="static" sx={{ backgroundColor: "#FFFFFF" , color:"#335C6E" }}>
             <Toolbar sx={{ display: { xs: 'flex', lg: 'none' }, justifyContent: 'space-between' }}>
                 <Typography variant="h6" noWrap component="div">
-                        MyApp
+                        Ello
                     </Typography>
                     <IconButton
                         edge="start"
@@ -43,7 +43,8 @@ const  Navbar =()=> {
                         <Typography
                             key={index}
                             variant="h6"
-                            component="div"
+                            component={Link}
+                            to={nav.link}
                             sx={{ padding: 1 }}
                         >
                             {nav.name}
@@ -65,7 +66,7 @@ const  Navbar =()=> {
                 >
                     <List>
                         {navLinks.map((nav, index) => (
-                            <ListItem button key={index}>
+                            <ListItem  button component={Link} to={nav.link} key={index}>
                                 <ListItemText primary={nav.name} />
                             </ListItem>
                         ))}

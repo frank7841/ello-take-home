@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
         errorElement: <Error/>
     },
     {
-        path:"/",
+        path:"/reading-list",
         element: <ReadingList/>,
         errorElement: <Error/>
     }
