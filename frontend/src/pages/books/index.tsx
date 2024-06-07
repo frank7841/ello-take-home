@@ -1,4 +1,4 @@
-import { Grid, TextField, IconButton, InputAdornment, Typography, CircularProgress, Alert, List,ListItem, Paper, ListItemText,Button, Box } from '@mui/material';
+import { Grid, TextField, IconButton, InputAdornment, Typography, CircularProgress, Alert, List,ListItem, Paper, ListItemText,Button, Box, ListItemAvatar, Avatar } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear'
 import { useQuery,gql } from '@apollo/client';
 import BookCard from '../../components/Book-card';
@@ -54,7 +54,7 @@ const clearSearch = () => {
 
   return ( 
     <div>
-        <Typography variant="h1" component="h2" gutterBottom>Books</Typography>
+        <Typography variant="h2" component="h3" gutterBottom>Book Assignment View</Typography>
         
         <Box width="100%" display="flex" justifyContent="center">
             <Box width="50%" display="flex" flexDirection="column" alignItems="center">
@@ -84,8 +84,11 @@ const clearSearch = () => {
                         <List>
                             {searchResults?.map((book, index) => (
                                 <ListItem key={`${book.title}-${index}`} divider>
+                                     <ListItemAvatar>
+                                     <img src={`/${book.coverPhotoURL}`} alt={book.title} style={{ maxWidth: '100px',paddingRight:"0.5em" }} />
+                                    </ListItemAvatar>
                                     <ListItemText primary={book.title} secondary={book.author} />
-                                    <Button onClick={() => handleAddToReadingList(book)}>Add to reading list</Button>
+                                    <Button variant='contained' style={{backgroundColor:"#28B8B8"}} onClick={() => handleAddToReadingList(book)}>Add to list</Button>
                                 </ListItem>
                             ))}
                         </List>
@@ -93,7 +96,7 @@ const clearSearch = () => {
                 )}
            </Box>
        </Box>
-       <Typography variant="h3" component="h4" gutterBottom>Reading List</Typography>
+       <Typography variant="h3" component="h4" gutterBottom>My Reading List</Typography>
        <Grid container spacing={3} mt={5}>
             {readingList.map((book, index) => (
                 <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>

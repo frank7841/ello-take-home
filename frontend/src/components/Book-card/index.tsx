@@ -33,7 +33,7 @@ const BookCard = ({ book, inReadingList, onRemove }:BookCardProps) => {
                     {book.readingLevel}
                 </Typography>
                 {inReadingList && (
-                    <Button onClick={handleRemoveClick}>Remove</Button>
+                    <Button variant='contained' style={{ backgroundColor: '#FAAD00' }} onClick={handleRemoveClick}>Remove</Button>
                 ) }
             </CardContent>
         </Card>

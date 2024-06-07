@@ -20,7 +20,7 @@ const Layout = ({children}:LayoutProps)=>{
             height:"100vh",
 
         }} >
-            <Navbar/>
+            {/* <Navbar/> */}
             <Box sx={{width:"100%"}}>{children}</Box>
 
         </Box>
