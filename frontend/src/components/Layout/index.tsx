@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
-import Navbar from "../Navbar";
+
 
 interface LayoutProps{
     children:ReactNode
@@ -20,7 +20,7 @@ const Layout = ({children}:LayoutProps)=>{
             height:"100vh",
 
         }} >
-            {/* <Navbar/> */}
+           
             <Box sx={{width:"100%"}}>{children}</Box>
 
         </Box>

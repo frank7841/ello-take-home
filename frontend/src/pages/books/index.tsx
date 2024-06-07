@@ -66,7 +66,7 @@ const Books =()=> {
     <div>
 
         
-        <Box width="100%" display="flex" justifyContent="center">
+        <Box width="100%" display="flex" justifyContent="center" >
             <Box width="50%" display="flex" flexDirection="column" alignItems="center">
                 <TextField
                     label="Search books"
@@ -114,13 +114,13 @@ const Books =()=> {
         
         <Grid container spacing={3} mt={5}>
         {readingList.map((book, index) => (
-            <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
+            <Grid item xs={12} sm={6} md={4} mb={3} key={`${book.title}-${index}`}>
                 <BookCard book={book} inReadingList={true} onRemove={handleRemoveFromReadingList} />
             </Grid>
         ))}
-    </Grid>
+         </Grid>
        )}
-               <Typography variant="h3" component="h4" gutterBottom>All Books</Typography>
+        <Typography variant="h3" component="h4" gutterBottom>All Books</Typography>
         <Grid container spacing={3} mt={5}>
             {data?.books.map((book, index) => (
                 <Grid item xs={12} sm={6} md={4} key={`${book.title}-${index}`}>
