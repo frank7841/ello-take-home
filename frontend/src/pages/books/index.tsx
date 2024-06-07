@@ -63,7 +63,7 @@ const Books =()=> {
 
         
         <Box width="100%" display="flex" justifyContent="center" >
-            <Box width="50%" display="flex" flexDirection="column" alignItems="center">
+            <Box width={{ xs: "100%", md: "50%" }} display="flex" flexDirection="column" alignItems="center">
                 <TextField
                     label="Search books"
                     value={searchQuery}
@@ -86,19 +86,19 @@ const Books =()=> {
                     }}
                 />
                 {searchQuery && (
-                    <Paper elevation={3} style={{ marginTop: '16px', maxHeight: '300px', overflowY: 'auto' }}>
-                        <List>
-                            {searchResults?.map((book, index) => (
-                                <ListItem key={`${book.title}-${index}`} divider>
-                                     <ListItemAvatar>
-                                     <img src={`/${book.coverPhotoURL}`} alt={book.title} style={{ maxWidth: '100px',paddingRight:"0.5em" }} />
-                                    </ListItemAvatar>
-                                    <ListItemText primary={book.title} secondary={book.author} />
-                                    <Button variant='contained' style={{backgroundColor:"#28B8B8"}} onClick={() => handleAddToReadingList(book)}>Add to list</Button>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Paper>
+                   <Paper elevation={3} style={{ marginTop: '16px', maxHeight: '60vh', overflowY: 'auto' }}>
+                   <List>
+                       {searchResults?.map((book, index) => (
+                           <ListItem key={`${book.title}-${index}`} divider>
+                               <ListItemAvatar>
+                                   <img src={`/${book.coverPhotoURL}`} alt={book.title} style={{ maxWidth: '100px', paddingRight: "0.5em" }} />
+                               </ListItemAvatar>
+                               <ListItemText primary={book.title} secondary={book.author} />
+                               <Button variant='contained' style={{ backgroundColor: "#28B8B8" }} onClick={() => handleAddToReadingList(book)}>Add to list</Button>
+                           </ListItem>
+                       ))}
+                   </List>
+               </Paper>
                 )}
            </Box>
        </Box>
