@@ -4,6 +4,8 @@ import { useQuery,gql } from '@apollo/client';
 import BookCard from '../../components/Book-card';
 import { Book } from '../../types';
 import { useState } from 'react';
+
+// GraphQL query to get the list of books
 const GET_BOOKS = gql`
     query GetBooks {
         books {
@@ -15,7 +17,10 @@ const GET_BOOKS = gql`
     }
 `;
 const Books =()=> {
+    // Use Apollo Client's useQuery hook to fetch books data
     const { loading, error, data } = useQuery<{ books: Book[] }>(GET_BOOKS);
+
+     // State hooks for search query, reading list, and snackbar
     const [searchQuery, setSearchQuery] = useState('');
     const [readingList, setReadingList] = useState<Book[]>([]);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -28,6 +33,7 @@ const Books =()=> {
         setSearchQuery(e.target.value);
     };
 
+       // Add book to reading list and show snackbar
     const handleAddToReadingList = (book: Book) => {
         if (!readingList.includes(book)) {
             setReadingList([...readingList, book]);
@@ -39,7 +45,7 @@ const Books =()=> {
         const updatedList = readingList.filter((item) => item !== book);
         setReadingList(updatedList);
     };
-
+   // Filter search results based on search query
     const searchResults = searchQuery.trim() !== '' ?
     data?.books.filter(book =>
         book.title.toLowerCase().includes(searchQuery.toLowerCase())
